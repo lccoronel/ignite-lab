@@ -10,6 +10,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model costumer {
+model Custumer {
   id String @id @default(uuid())
+
+  purchasedOn Purchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Product {
+  id String @id @default(uuid())
+
+  title String
+  slug  String @unique
+
+  purchasedOn Purchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+enum PurchaseStatus {
+  PENDING
+  APPROVED
+  FAILED
+}
+
+model Purchase {
+  id String @id @default(uuid())
+
+  costumer   Custumer       @relation(fields: [custumerId], references: [id])
+  custumerId String
+  status     PurchaseStatus @default(PENDING)
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
