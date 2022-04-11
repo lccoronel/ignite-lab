@@ -8,14 +8,46 @@ type Product {
   slug: String!
 }
 
+type Purchase {
+  id: ID!
+  status: PurchaseStatus!
+  createdAt: DateTime!
+  product: Product!
+}
+
+"""Purchases available statuses"""
+enum PurchaseStatus {
+  PENDING
+  APPROVED
+  FAILED
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Customer {
+  id: ID!
+  purchase: [Purchase!]!
+  purchases: Purchase!
+}
+
 type Query {
   products: [Product!]!
+  purchases: [Purchase!]!
+  me: Customer!
 }
 
 type Mutation {
   createProduct(data: CreateProductInput!): Product!
+  createPurchase(data: CreatePurchaseInput!): Purchase!
 }
 
 input CreateProductInput {
   title: String!
+}
+
+input CreatePurchaseInput {
+  productId: String!
 }

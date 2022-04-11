@@ -18,26 +18,26 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
-  // const session = getSession(req, res)
+  const session = getSession(req, res)
   const token = await getAccessToken(req, res)
   console.log(token);
   
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: '/api/auth/login',
-  //       permanent: false
-  //     }
-  //   }
-  // } else {
-  //   return {
-  //     redirect: {
-  //       destination: '/app',
-  //       permanent: false
-  //     }
-  //   }
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/login',
+        permanent: false
+      }
+    }
+  } else {
+    return {
+      redirect: {
+        destination: '/app',
+        permanent: false
+      }
+    }
+  }
 
   return {
     props: {}

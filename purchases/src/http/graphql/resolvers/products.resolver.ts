@@ -6,7 +6,7 @@ import { AutorizathionGuard } from '../../../http/auth/autorizathion.guard';
 import { Product } from '../models/products';
 import { CreateProductInput } from '../inputs/create-product-inputs';
 
-@Resolver()
+@Resolver(() => Product)
 export class ProductsResolver {
   constructor(private productsService: ProductsService) {}
 
