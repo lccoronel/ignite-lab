@@ -7,10 +7,10 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
+
 import { CurrentUser } from 'src/http/auth/current-user';
 import { ProductsService } from 'src/services/products.service';
 import { CustomerService } from 'src/services/customers.service';
-
 import { AutorizathionGuard } from '../../../http/auth/autorizathion.guard';
 import { PurchasesService } from 'src/services/purchases.service';
 import { CreatePurchaseInput } from '../inputs/create-purchase-inputs';
@@ -26,7 +26,7 @@ export class PurchasesResolver {
   ) {}
 
   @Query(() => [Purchase])
-  // @UseGuards(AutorizathionGuard)
+  @UseGuards(AutorizathionGuard)
   purchases() {
     return this.purchasesService.listAllPurchases();
   }

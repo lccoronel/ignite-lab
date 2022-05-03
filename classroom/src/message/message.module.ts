@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'src/database/database.module';
 
+import { DatabaseModule } from 'src/database/database.module';
 import { CourseService } from 'src/services/course.service';
 import { EnrollmentService } from 'src/services/enrollment.service';
 import { StudentService } from 'src/services/student.service';
